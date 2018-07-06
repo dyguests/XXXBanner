@@ -1,0 +1,33 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion ext_android.compileSdkVersion
+    defaultConfig {
+        applicationId ext_android.applicationId
+        minSdkVersion ext_android.minSdkVersion
+        targetSdkVersion ext_android.targetSdkVersion
+        versionCode ext_android.versionCode
+        versionName ext_android.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation ext_dependencies.kotlin_jre7
+    implementation ext_dependencies.support_v7
+    implementation ext_dependencies.constraint
+    testImplementation ext_dependencies.junit
+    androidTestImplementation ext_dependencies.runner
+    androidTestImplementation ext_dependencies.espresso
+}
