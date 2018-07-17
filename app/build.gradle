@@ -23,11 +23,13 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation ext_dependencies.kotlin_jre7
     implementation ext_dependencies.support_v7
     implementation ext_dependencies.constraint
+    implementation ext_dependencies.glide
     testImplementation ext_dependencies.junit
     androidTestImplementation ext_dependencies.runner
     androidTestImplementation ext_dependencies.espresso
+    implementation project(':library')
 }
