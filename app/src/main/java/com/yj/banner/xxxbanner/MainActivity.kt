@@ -43,8 +43,11 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
                 .setImageLoader(GlideImageLoader())
                 .setOnBannerListener(this)
                 .start()
-        item2.setOnClickListener {
+        item1.setOnClickListener {
             startActivity(Intent(this, BannerAnimationActivity::class.java))
+        }
+        item2.setOnClickListener {
+            startActivity(Intent(this, BannerStyleActivity::class.java))
         }
         item3.setOnClickListener {
             startActivity(Intent(this, IndicatorPositionActivity::class.java))

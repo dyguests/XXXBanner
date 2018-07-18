@@ -1,15 +1,12 @@
 package com.yj.banner.xxxbanner.demo
 
+
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-
-
 import com.yj.banner.xxxbanner.R
-import com.yj.banner.xxxbanner.loader.GlideImageLoader
+import com.yj.banner.xxxbanner.loader.LocalImageLoader
 import com.yj.xxxbanner.Banner
 import kotlinx.android.synthetic.main.activity_banner_local.*
-
-import java.util.ArrayList
 
 class BannerLocalActivity : AppCompatActivity() {
 
@@ -28,7 +25,7 @@ class BannerLocalActivity : AppCompatActivity() {
         )
 
         (banner as Banner<Int>).setImages(list)
-                .setImageLoader(GlideImageLoader())
+                .setImageLoader(LocalImageLoader())
                 .start()
     }
 }
