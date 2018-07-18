@@ -29,6 +29,7 @@ dependencies {
     implementation ext_dependencies.constraint
     implementation ext_dependencies.glide
     implementation ext_dependencies.gson
+    implementation ext_dependencies.design
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation ext_dependencies.junit
     androidTestImplementation ext_dependencies.runner
