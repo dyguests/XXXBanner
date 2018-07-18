@@ -1,5 +1,5 @@
 package com.yj.xxxbanner.listener
 
 interface OnBannerListener {
-    fun OnBannerClick(position: Int)
+    fun onBannerClick(position: Int)
 }

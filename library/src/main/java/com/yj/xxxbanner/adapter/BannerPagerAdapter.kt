@@ -27,7 +27,7 @@ class BannerPagerAdapter(private val views: List<View>, private val listener: On
         val view = views[position]
 
         if (listener != null) {
-            view.setOnClickListener { listener.OnBannerClick(toRealPosition(position)) }
+            view.setOnClickListener { listener.onBannerClick(toRealPosition(position)) }
         }
         return view
     }

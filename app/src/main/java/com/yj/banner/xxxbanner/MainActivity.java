@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     }
 
     @Override
-    public void OnBannerClick(int position) {
+    public void onBannerClick(int position) {
         Toast.makeText(getApplicationContext(), "你点击了：" + position, Toast.LENGTH_SHORT).show();
     }
 

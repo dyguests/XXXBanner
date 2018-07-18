@@ -1,24 +1,7 @@
 package com.yj.xxxbanner
 
 import android.support.v4.view.ViewPager.PageTransformer
-
-import com.yj.xxxbanner.transformer.AccordionTransformer
-import com.yj.xxxbanner.transformer.BackgroundToForegroundTransformer
-import com.yj.xxxbanner.transformer.CubeInTransformer
-import com.yj.xxxbanner.transformer.CubeOutTransformer
-import com.yj.xxxbanner.transformer.DefaultTransformer
-import com.yj.xxxbanner.transformer.DepthPageTransformer
-import com.yj.xxxbanner.transformer.FlipHorizontalTransformer
-import com.yj.xxxbanner.transformer.FlipVerticalTransformer
-import com.yj.xxxbanner.transformer.ForegroundToBackgroundTransformer
-import com.yj.xxxbanner.transformer.RotateDownTransformer
-import com.yj.xxxbanner.transformer.RotateUpTransformer
-import com.yj.xxxbanner.transformer.ScaleInOutTransformer
-import com.yj.xxxbanner.transformer.StackTransformer
-import com.yj.xxxbanner.transformer.TabletTransformer
-import com.yj.xxxbanner.transformer.ZoomInTransformer
-import com.yj.xxxbanner.transformer.ZoomOutSlideTransformer
-import com.yj.xxxbanner.transformer.ZoomOutTranformer
+import com.yj.xxxbanner.transformer.*
 
 object Transformer {
     var Default: Class<out PageTransformer> = DefaultTransformer::class.java
@@ -38,4 +21,5 @@ object Transformer {
     var ZoomIn: Class<out PageTransformer> = ZoomInTransformer::class.java
     var ZoomOut: Class<out PageTransformer> = ZoomOutTranformer::class.java
     var ZoomOutSlide: Class<out PageTransformer> = ZoomOutSlideTransformer::class.java
+    var Alpha: Class<out PageTransformer> = AlphaTransFormer::class.java
 }

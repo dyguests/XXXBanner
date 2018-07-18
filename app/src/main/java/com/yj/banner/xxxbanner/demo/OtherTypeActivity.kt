@@ -11,6 +11,7 @@ import com.yj.banner.xxxbanner.bean.TourismResponse
 import com.yj.banner.xxxbanner.loader.GlideImageLoader
 import com.yj.banner.xxxbanner.loader.ViewLoader
 import com.yj.xxxbanner.Banner
+import com.yj.xxxbanner.Transformer
 import com.yj.xxxbanner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.activity_other_type.*
 
@@ -21,10 +22,11 @@ class OtherTypeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_other_type)
         val arrayList = Gson().fromJson<List<TourismResponse>>(json, (object : TypeToken<List<TourismResponse>>() {}).type)
         (banner as (Banner<TourismResponse>)).setImages(arrayList)
+                .setBannerAnimation(Transformer.Alpha)
                 .setImageLoader(ViewLoader())
-                .setOnBannerListener(object :OnBannerListener{
-                    override fun OnBannerClick(position: Int) {
-                        Toast.makeText(this@OtherTypeActivity,arrayList[position].title,Toast.LENGTH_LONG).show()
+                .setOnBannerListener(object : OnBannerListener {
+                    override fun onBannerClick(position: Int) {
+                        Toast.makeText(this@OtherTypeActivity, arrayList[position].title, Toast.LENGTH_LONG).show()
                     }
                 })
                 .start()
