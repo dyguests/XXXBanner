@@ -20,7 +20,6 @@ class ViewLoader : ImageLoaderInterface<View, TourismResponse> {
     override fun displayView(context: Context, tourismResponse: TourismResponse, view: View) {
         view.apply {
             tv_title.text = tourismResponse.title?.takeIf { it.isNotBlank() }?.let { "$it" } ?: ""
-//            tv_title.text ="《先测试用先测试用先测试用先测试用先测试用先测试用先测试用llllllll》"
             tv_content.text = tourismResponse.description ?: ""
             tv_name.text = tourismResponse.userName ?: ""
             tv_address.text = tourismResponse.place ?: ""
@@ -28,9 +27,9 @@ class ViewLoader : ImageLoaderInterface<View, TourismResponse> {
             GlideUtil.clearLoad(context, img_picture)
             GlideUtil.loadPicture(img_head, tourismResponse.userPhoto
                     ?: "", R.drawable.login_header_default)
-            if (tourismResponse.imageUrl != null && tourismResponse.imageUrl!!.isNotEmpty()) {
-                GlideUtil.loadRoundPicture(img_picture, tourismResponse.imageUrl!![0]
-                        ?: "", SystemUtil.dip2px(context, 5f), R.drawable.cover_main_banner_empty_holder)
+            if (tourismResponse.imageUrl != null && tourismResponse.imageUrl.isNotEmpty()) {
+                GlideUtil.loadRoundPicture(img_picture, tourismResponse.imageUrl[0]
+                        ?: "", SystemUtil.dip2px(context, 5f).toFloat(), R.drawable.cover_main_banner_empty_holder)
             }
 
         }

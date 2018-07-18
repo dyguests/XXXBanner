@@ -86,8 +86,7 @@ object GlideUtil {
      * @param url
      * 图片地址
      */
-    fun loadRoundPicture(imageView: ImageView, url: String, radius: Int, @DrawableRes defaultDrawableRes: Int) {
-
+    fun loadRoundPicture(imageView: ImageView, url: String, radius: Float, @DrawableRes defaultDrawableRes: Int) {
 
         try {
 
@@ -132,7 +131,8 @@ object GlideUtil {
      * @param url
      * 图片地址
      */
-    fun loadRoundPicture(imageView: ImageView, url: String, radius: Int) {
+    fun loadRoundPicture(imageView: ImageView, url: String, radius: Float
+    ) {
 
 
         try {
