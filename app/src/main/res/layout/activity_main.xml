@@ -1,5 +1,6 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -9,10 +10,79 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/list"
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@null"/>
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.yj.xxxbanner.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@color/colorPrimary"
+                    />
+                <!--  <item>banner动画预览</item>
+                  <item>banner内置样式预览</item>
+                  <item>banner指示器位置设置预览</item>
+                  <item>banner一些自定义样式方法预览</item>
+                  <item>banner加载本地图片</item>
+                  <item>banner自定义布局文件（这里通过修改ViewPager举一反三吧）</item>
+                  <item>！！banner更多用法请看文档，这里就不一一列举了！</item>
+                  <item>自定义banner的样式</item>-->
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:orientation="vertical"
+                    app:showDividers="middle"
+                    app:divider="@color/colorPrimary">
+
+                    <TextView
+                        android:id="@+id/item1"
+                        style="@style/text_style"
+                        android:text="banner动画预览"/>
+
+                    <TextView
+                        android:id="@+id/item2"
+                        style="@style/text_style"
+                        android:text="banner内置样式预览"/>
+
+                    <TextView
+                        android:id="@+id/item3"
+                        style="@style/text_style"
+                        android:text="banner指示器位置设置预览"/>
+
+                    <TextView
+                        android:id="@+id/item4"
+                        style="@style/text_style"
+                        android:text="banner一些自定义样式方法预览"/>
+
+                    <TextView
+                        android:id="@+id/item5"
+                        style="@style/text_style"
+                        android:text="banner加载本地图片"/>
+
+                    <TextView
+                        android:id="@+id/item6"
+                        style="@style/text_style"
+                        android:text="banner自定义布局文件（这里通过修改ViewPager举一反三吧）"/>
+
+                    <TextView
+                        android:id="@+id/item7"
+                        style="@style/text_style"
+                        android:text="！！banner更多用法请看文档，这里就不一一列举了！"/>
+
+                    <TextView
+                        android:id="@+id/item8"
+                        style="@style/text_style"
+                        android:text="自定义banner的样式"/>
+                </android.support.v7.widget.LinearLayoutCompat>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
     </com.yj.banner.xxxbanner.SuperSwipeRefreshLayout>
 </LinearLayout>
