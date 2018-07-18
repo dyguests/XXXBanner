@@ -95,7 +95,7 @@ object GlideUtil {
                     .placeholder(defaultDrawableRes)
                     .error(defaultDrawableRes)
                     .priority(Priority.HIGH)
-                    .transform(GlideRoundTransform(imageView.context, radius))
+                    .transform(GlideRoundTransform(radius))
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
             if (!url.isNullOrBlank()) {
                 Glide.with(imageView.context)
@@ -138,7 +138,7 @@ object GlideUtil {
         try {
             val options = RequestOptions()
                     .priority(Priority.HIGH)
-                    .transform(GlideRoundTransform(imageView.context, radius))
+                    .transform(GlideRoundTransform(radius))
                     //.skipMemoryCache(true)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
             if (!url.isNullOrBlank()) {

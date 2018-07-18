@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.yj.xxxbanner.adapter.BannerPagerAdapter;
 import com.yj.xxxbanner.listener.OnBannerListener;
 import com.yj.xxxbanner.loader.ImageLoaderInterface;
 import com.yj.xxxbanner.view.BannerViewPager;
@@ -65,7 +66,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private LinearLayout indicator, indicatorInside, titleView;
     private ImageView bannerDefaultImage;
     private ImageLoaderInterface imageLoader;
-    private BannerPagerAdapter adapter;
+    private PagerAdapter adapter;
     private OnPageChangeListener mOnPageChangeListener;
     private BannerScroller mScroller;
     private OnBannerListener listener;
@@ -189,7 +190,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
      * current page in the view hierarchy in an idle state. Pages beyond this
      * limit will be recreated from the adapter when needed.
      *
-     * @param limit How many pages will be kept offscreen in an idle state.
+     * @param limit
+     *         How many pages will be kept offscreen in an idle state.
      * @return Banner
      */
     public Banner setOffscreenPageLimit(int limit) {
@@ -204,9 +206,11 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
      * the scroll position is changed. This allows the application to apply custom property
      * transformations to each page, overriding the default sliding look and feel.
      *
-     * @param reverseDrawingOrder true if the supplied PageTransformer requires page views
-     *                            to be drawn from last to first instead of first to last.
-     * @param transformer         PageTransformer that will modify each page's animation properties
+     * @param reverseDrawingOrder
+     *         true if the supplied PageTransformer requires page views
+     *         to be drawn from last to first instead of first to last.
+     * @param transformer
+     *         PageTransformer that will modify each page's animation properties
      * @return Banner
      */
     public Banner setPageTransformer(boolean reverseDrawingOrder, PageTransformer transformer) {
@@ -292,7 +296,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     }
 
     private void setBannerStyleUI() {
-        int visibility =count > 1 ? View.VISIBLE : View.GONE;
+        int visibility = count > 1 ? View.VISIBLE : View.GONE;
         switch (bannerStyle) {
             case BannerConfig.CIRCLE_INDICATOR:
                 indicator.setVisibility(visibility);
@@ -422,7 +426,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private void setData() {
         currentItem = 1;
         if (adapter == null) {
-            adapter = new BannerPagerAdapter();
+            adapter = new BannerPagerAdapter(imageViews, listener);
             viewPager.addOnPageChangeListener(this);
         }
         viewPager.setAdapter(adapter);
@@ -494,41 +498,6 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         return realPosition;
     }
 
-    class BannerPagerAdapter extends PagerAdapter {
-
-        @Override
-        public int getCount() {
-            return imageViews.size();
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, final int position) {
-            container.addView(imageViews.get(position));
-            View view = imageViews.get(position);
-
-            if (listener != null) {
-                view.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        listener.OnBannerClick(toRealPosition(position));
-                    }
-                });
-            }
-            return view;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View) object);
-        }
-
-    }
-
     @Override
     public void onPageScrollStateChanged(int state) {
         if (mOnPageChangeListener != null) {
@@ -564,7 +533,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
 
     @Override
     public void onPageSelected(int position) {
-        currentItem=position;
+        currentItem = position;
         if (mOnPageChangeListener != null) {
             mOnPageChangeListener.onPageSelected(toRealPosition(position));
         }
