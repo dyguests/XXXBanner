@@ -14,23 +14,22 @@
  * limitations under the License.
  */
 
-package com.yj.xxxbanner.transformer;
+package com.yj.xxxbanner.transformer
 
-import android.view.View;
+import android.view.View
 
-public class ForegroundToBackgroundTransformer extends ABaseTransformer {
+class ZoomOutTranformer : ABaseTransformer(false) {
 
-	@Override
-	protected void onTransform(View view, float position) {
-		final float height = view.getHeight();
-		final float width = view.getWidth();
-		final float scale = min(position > 0 ? 1f : Math.abs(1f + position), 0.5f);
-
-		view.setScaleX(scale);
-		view.setScaleY(scale);
-		view.setPivotX(width * 0.5f);
-		view.setPivotY(height * 0.5f);
-		view.setTranslationX(position > 0 ? width * position : -width * position * 0.25f);
-	}
+    override fun onTransform(view: View, position: Float) {
+        val scale = 1f + Math.abs(position)
+        view.scaleX = scale
+        view.scaleY = scale
+        view.pivotX = view.width * 0.5f
+        view.pivotY = view.height * 0.5f
+        view.alpha = if (position < -1f || position > 1f) 0f else 1f - (scale - 1f)
+        if (position == -1f) {
+            view.translationX = (view.width * -1).toFloat()
+        }
+    }
 
 }

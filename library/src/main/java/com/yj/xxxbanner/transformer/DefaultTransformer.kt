@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-package com.yj.xxxbanner.transformer;
+package com.yj.xxxbanner.transformer
 
-import android.view.View;
+import android.view.View
 
-public class StackTransformer extends ABaseTransformer {
+class DefaultTransformer : ABaseTransformer(true) {
 
-	@Override
-	protected void onTransform(View view, float position) {
-		view.setTranslationX(position < 0 ? 0f : -view.getWidth() * position);
-	}
+    override fun onTransform(view: View, position: Float) {}
 
 }

@@ -14,23 +14,18 @@
  * limitations under the License.
  */
 
-package com.yj.xxxbanner.transformer;
+package com.yj.xxxbanner.transformer
 
-import android.view.View;
+import android.view.View
 
-public class BackgroundToForegroundTransformer extends ABaseTransformer {
+class CubeInTransformer : ABaseTransformer(true) {
 
-	@Override
-	protected void onTransform(View view, float position) {
-		final float height = view.getHeight();
-		final float width = view.getWidth();
-		final float scale = min(position < 0 ? 1f : Math.abs(1f - position), 0.5f);
 
-		view.setScaleX(scale);
-		view.setScaleY(scale);
-		view.setPivotX(width * 0.5f);
-		view.setPivotY(height * 0.5f);
-		view.setTranslationX(position < 0 ? width * position : -width * position * 0.25f);
-	}
+    override fun onTransform(view: View, position: Float) {
+        // Rotate the fragment on the left or right edge
+        view.pivotX = (if (position > 0) 0 else view.width).toFloat()
+        view.pivotY = 0f
+        view.rotationY = -90f * position
+    }
 
 }

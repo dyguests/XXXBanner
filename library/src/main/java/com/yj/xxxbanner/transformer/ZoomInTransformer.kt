@@ -14,16 +14,19 @@
  * limitations under the License.
  */
 
-package com.yj.xxxbanner.transformer;
+package com.yj.xxxbanner.transformer
 
-import android.view.View;
+import android.view.View
 
-public class AccordionTransformer extends ABaseTransformer {
+class ZoomInTransformer : ABaseTransformer(false) {
 
-	@Override
-	protected void onTransform(View view, float position) {
-		view.setPivotX(position < 0 ? 0 : view.getWidth());
-		view.setScaleX(position < 0 ? 1f + position : 1f - position);
-	}
+    override fun onTransform(view: View, position: Float) {
+        val scale = if (position < 0) position + 1f else Math.abs(1f - position)
+        view.scaleX = scale
+        view.scaleY = scale
+        view.pivotX = view.width * 0.5f
+        view.pivotY = view.height * 0.5f
+        view.alpha = if (position < -1f || position > 1f) 0f else 1f - (scale - 1f)
+    }
 
 }

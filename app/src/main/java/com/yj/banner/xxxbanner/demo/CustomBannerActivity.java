@@ -11,7 +11,7 @@ import com.yj.xxxbanner.BannerConfig;
 
 
 public class CustomBannerActivity extends AppCompatActivity {
-    Banner banner1,banner2,banner3;
+    Banner<String> banner1,banner2,banner3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -14,22 +14,27 @@
  * limitations under the License.
  */
 
-package com.yj.xxxbanner.transformer;
+package com.yj.xxxbanner.transformer
 
-import android.view.View;
+import android.view.View
 
-public class CubeOutTransformer extends ABaseTransformer {
+class RotateDownTransformer : ABaseTransformer(true) {
 
-	@Override
-	protected void onTransform(View view, float position) {
-		view.setPivotX(position < 0f ? view.getWidth() : 0f);
-		view.setPivotY(view.getHeight() * 0.5f);
-		view.setRotationY(90f * position);
-	}
 
-	@Override
-	public boolean isPagingEnabled() {
-		return true;
-	}
+
+    override fun onTransform(view: View, position: Float) {
+        val width = view.width.toFloat()
+        val height = view.height.toFloat()
+        val rotation = ROT_MOD * position * -1.25f
+
+        view.pivotX = width * 0.5f
+        view.pivotY = height
+        view.rotation = rotation
+    }
+
+    companion object {
+
+        private val ROT_MOD = -15f
+    }
 
 }

@@ -20,6 +20,7 @@ import com.yj.banner.xxxbanner.demo.BannerStyleActivity;
 import com.yj.banner.xxxbanner.demo.CustomBannerActivity;
 import com.yj.banner.xxxbanner.demo.CustomViewPagerActivity;
 import com.yj.banner.xxxbanner.demo.IndicatorPositionActivity;
+import com.yj.banner.xxxbanner.demo.OtherTypeActivity;
 import com.yj.banner.xxxbanner.loader.GlideImageLoader;
 import com.yj.xxxbanner.Banner;
 import com.yj.xxxbanner.listener.OnBannerListener;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     static final int REFRESH_COMPLETE = 0X1112;
     SuperSwipeRefreshLayout mSwipeLayout;
     ListView listView;
-    Banner banner;
+    Banner<String> banner;
 
     private Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         listView.addHeaderView(banner);
 
         String[] data = getResources().getStringArray(R.array.demo_list);
-        listView.setAdapter(new SampleAdapter(this,data));
+        listView.setAdapter(new SampleAdapter(this, data));
         listView.setOnItemClickListener(this);
 
         //简单使用
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     @Override
     public void OnBannerClick(int position) {
-        Toast.makeText(getApplicationContext(),"你点击了："+position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "你点击了：" + position, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -101,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        switch (position){
+        switch (position) {
             case 1:
                 startActivity(new Intent(this, BannerAnimationActivity.class));
                 break;
@@ -119,6 +121,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 break;
             case 6:
                 startActivity(new Intent(this, CustomViewPagerActivity.class));
+                break;
+            case 7:
+                startActivity(new Intent(this, OtherTypeActivity.class));
                 break;
         }
     }

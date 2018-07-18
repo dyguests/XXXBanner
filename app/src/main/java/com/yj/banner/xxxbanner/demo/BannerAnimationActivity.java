@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BannerAnimationActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, OnBannerListener {
-    Banner banner;
+    Banner<String> banner;
     List<Class<? extends ViewPager.PageTransformer>> transformers=new ArrayList<>();
     public void initData(){
         transformers.add(DefaultTransformer.class);

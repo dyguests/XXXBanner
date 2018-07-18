@@ -14,7 +14,7 @@ import com.yj.xxxbanner.BannerConfig;
 
 
 public class BannerStyleActivity extends AppCompatActivity implements  AdapterView.OnItemSelectedListener {
-    Banner banner;
+    Banner<String> banner;
     Spinner spinnerStyle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

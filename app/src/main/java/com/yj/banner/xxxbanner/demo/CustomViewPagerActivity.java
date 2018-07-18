@@ -13,7 +13,7 @@ import com.yj.xxxbanner.listener.OnBannerListener;
 
 
 public class CustomViewPagerActivity extends AppCompatActivity implements OnBannerListener {
-    Banner banner;
+    Banner<String> banner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

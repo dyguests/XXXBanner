@@ -14,7 +14,7 @@ import com.yj.xxxbanner.BannerConfig;
 
 
 public class IndicatorPositionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    Banner banner;
+    Banner<String> banner;
     Spinner spinnerPosition;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

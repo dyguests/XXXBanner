@@ -14,19 +14,15 @@
  * limitations under the License.
  */
 
-package com.yj.xxxbanner.transformer;
+package com.yj.xxxbanner.transformer
 
-import android.view.View;
+import android.view.View
 
-public class DefaultTransformer extends ABaseTransformer {
+class AccordionTransformer : ABaseTransformer(false) {
 
-	@Override
-	protected void onTransform(View view, float position) {
-	}
-
-	@Override
-	public boolean isPagingEnabled() {
-		return true;
-	}
+    override fun onTransform(view: View, position: Float) {
+        view.pivotX = (if (position < 0) 0 else view.width).toFloat()
+        view.scaleX = if (position < 0) 1f + position else 1f - position
+    }
 
 }

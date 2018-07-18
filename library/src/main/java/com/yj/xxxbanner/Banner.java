@@ -32,8 +32,8 @@ import java.util.List;
 import static android.support.v4.view.ViewPager.OnPageChangeListener;
 import static android.support.v4.view.ViewPager.PageTransformer;
 
-public class Banner extends FrameLayout implements OnPageChangeListener {
-    public String tag = "banner";
+public class Banner<T> extends FrameLayout implements OnPageChangeListener {
+    public String tag = Banner.class.getSimpleName();
     private int mIndicatorMargin = BannerConfig.PADDING_SIZE;
     private int mIndicatorWidth;
     private int mIndicatorHeight;
@@ -57,8 +57,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private int lastPosition = 1;
     private int scaleType = 1;
     private List<String> titles;
-    private List imageUrls;
-    private List<View> imageViews;
+    private List<T> dataList;
+    private List<View> views;
     private List<ImageView> indicatorImages;
     private Context context;
     private BannerViewPager viewPager;
@@ -86,8 +86,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         super(context, attrs, defStyle);
         this.context = context;
         titles = new ArrayList<>();
-        imageUrls = new ArrayList<>();
-        imageViews = new ArrayList<>();
+        dataList = new ArrayList<>();
+        views = new ArrayList<>();
         indicatorImages = new ArrayList<>();
         dm = context.getResources().getDisplayMetrics();
         indicatorSize = dm.widthPixels / 80;
@@ -95,17 +95,17 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     }
 
     private void initView(Context context, AttributeSet attrs) {
-        imageViews.clear();
+        views.clear();
         handleTypedArray(context, attrs);
         View view = LayoutInflater.from(context).inflate(mLayoutResId, this, true);
-        bannerDefaultImage = (ImageView) view.findViewById(R.id.bannerDefaultImage);
-        viewPager = (BannerViewPager) view.findViewById(R.id.bannerViewPager);
-        titleView = (LinearLayout) view.findViewById(R.id.titleView);
-        indicator = (LinearLayout) view.findViewById(R.id.circleIndicator);
-        indicatorInside = (LinearLayout) view.findViewById(R.id.indicatorInside);
-        bannerTitle = (TextView) view.findViewById(R.id.bannerTitle);
-        numIndicator = (TextView) view.findViewById(R.id.numIndicator);
-        numIndicatorInside = (TextView) view.findViewById(R.id.numIndicatorInside);
+        bannerDefaultImage = view.findViewById(R.id.bannerDefaultImage);
+        viewPager =  view.findViewById(R.id.bannerViewPager);
+        titleView = view.findViewById(R.id.titleView);
+        indicator = view.findViewById(R.id.circleIndicator);
+        indicatorInside = view.findViewById(R.id.indicatorInside);
+        bannerTitle = view.findViewById(R.id.bannerTitle);
+        numIndicator = view.findViewById(R.id.numIndicator);
+        numIndicatorInside = view.findViewById(R.id.numIndicatorInside);
         bannerDefaultImage.setImageResource(bannerBackgroundImage);
         initViewPagerScroll();
     }
@@ -233,24 +233,28 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         return this;
     }
 
-    public Banner setImages(List<?> imageUrls) {
-        this.imageUrls = imageUrls;
-        this.count = imageUrls.size();
+    public void setAdapter(PagerAdapter adapter) {
+        this.adapter = adapter;
+    }
+
+    public Banner setImages(List<T> dataList) {
+        this.dataList = dataList;
+        this.count = dataList.size();
         return this;
     }
 
-    public void update(List<?> imageUrls, List<String> titles) {
+    public void update(List<T> imageUrls, List<String> titles) {
         this.titles.clear();
         this.titles.addAll(titles);
         update(imageUrls);
     }
 
-    public void update(List<?> imageUrls) {
-        this.imageUrls.clear();
-        this.imageViews.clear();
+    public void update(List<T> imageUrls) {
+        this.dataList.clear();
+        this.views.clear();
         this.indicatorImages.clear();
-        this.imageUrls.addAll(imageUrls);
-        this.count = this.imageUrls.size();
+        this.dataList.addAll(imageUrls);
+        this.count = this.dataList.size();
         start();
     }
 
@@ -267,13 +271,13 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
 
     public Banner start() {
         setBannerStyleUI();
-        setImageList(imageUrls);
+        setImageList(dataList);
         setData();
         return this;
     }
 
     private void setTitleStyleUI() {
-        if (titles.size() != imageUrls.size()) {
+        if (titles.size() != dataList.size()) {
             throw new RuntimeException("[Banner] --> The number of titles and images is different");
         }
         if (titleBackground != -1) {
@@ -320,7 +324,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     }
 
     private void initImages() {
-        imageViews.clear();
+        views.clear();
         if (bannerStyle == BannerConfig.CIRCLE_INDICATOR ||
                 bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE ||
                 bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE) {
@@ -332,8 +336,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         }
     }
 
-    private void setImageList(List<?> imagesUrl) {
-        if (imagesUrl == null || imagesUrl.size() <= 0) {
+    private void setImageList(List<T> dataList) {
+        if (dataList == null || dataList.size() <= 0) {
             bannerDefaultImage.setVisibility(VISIBLE);
             Log.e(tag, "The image data set is empty.");
             return;
@@ -341,25 +345,25 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         bannerDefaultImage.setVisibility(GONE);
         initImages();
         for (int i = 0; i <= count + 1; i++) {
-            View imageView = null;
+            View view = null;
             if (imageLoader != null) {
-                imageView = imageLoader.createImageView(context);
+                view = imageLoader.createView(context);
             }
-            if (imageView == null) {
-                imageView = new ImageView(context);
+            if (view == null) {
+                view = new ImageView(context);
             }
-            setScaleType(imageView);
-            Object url = null;
+            setScaleType(view);
+            T t = null;
             if (i == 0) {
-                url = imagesUrl.get(count - 1);
+                t = dataList.get(count - 1);
             } else if (i == count + 1) {
-                url = imagesUrl.get(0);
+                t = dataList.get(0);
             } else {
-                url = imagesUrl.get(i - 1);
+                t = dataList.get(i - 1);
             }
-            imageViews.add(imageView);
+            views.add(view);
             if (imageLoader != null)
-                imageLoader.displayImage(context, url, imageView);
+                imageLoader.displayView(context, t, view);
             else
                 Log.e(tag, "Please set images loader.");
         }
@@ -426,7 +430,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private void setData() {
         currentItem = 1;
         if (adapter == null) {
-            adapter = new BannerPagerAdapter(imageViews, listener);
+            adapter = new BannerPagerAdapter(views, listener);
             viewPager.addOnPageChangeListener(this);
         }
         viewPager.setAdapter(adapter);

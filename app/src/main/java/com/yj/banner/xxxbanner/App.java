@@ -12,7 +12,7 @@ import java.util.List;
 
 
 public class App extends Application {
-    public static List<?> images=new ArrayList<>();
+    public static List<String> images=new ArrayList<>();
     public static List<String> titles=new ArrayList<>();
     public static int H,W;
     public static App app;
