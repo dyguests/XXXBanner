@@ -8,9 +8,11 @@ import com.yj.xxxbanner.loader.ImageLoaderInterface
 
 
 class LocalImageLoader : ImageLoaderInterface<ImageView, Int> {
-    override fun displayView(context: Context, path: Int, view: ImageView) {
-        view.setImageResource(path)
+    override fun displayView(context: Context, bean: Int, view: ImageView, position: Int, count: Int) {
+        view.setImageResource(bean)
     }
+
+
 
     override fun createView(context: Context): ImageView {
         return ImageView(context)

@@ -1,14 +1,12 @@
 package com.yj.banner.xxxbanner.demo
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.yj.banner.xxxbanner.App
 import com.yj.banner.xxxbanner.R
 import com.yj.banner.xxxbanner.bean.TourismResponse
-import com.yj.banner.xxxbanner.loader.GlideImageLoader
 import com.yj.banner.xxxbanner.loader.ViewLoader
 import com.yj.xxxbanner.Banner
 import com.yj.xxxbanner.Transformer

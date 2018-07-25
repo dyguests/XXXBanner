@@ -8,9 +8,11 @@ import com.yj.xxxbanner.loader.ImageLoaderInterface
 
 
 class GlideImageLoader : ImageLoaderInterface<ImageView, String> {
-    override fun displayView(context: Context, path: String, view: ImageView) {
-        GlideUtil.loadPicture(view, path)
+    override fun displayView(context: Context, bean: String, view: ImageView, position: Int, count: Int) {
+        GlideUtil.loadPicture(view, bean)
     }
+
+
 
     override fun createView(context: Context): ImageView {
         return ImageView(context)

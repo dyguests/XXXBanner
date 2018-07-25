@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.item_tourism_k6.view.*
  * @author yinYin
  */
 class ViewLoader : ImageLoaderInterface<View, TourismResponse> {
-    override fun displayView(context: Context, tourismResponse: TourismResponse, view: View) {
+    override fun displayView(context: Context, tourismResponse: TourismResponse, view: View, position: Int, count: Int) {
         view.apply {
             tv_title.text = tourismResponse.title?.takeIf { it.isNotBlank() }?.let { "$it" } ?: ""
             tv_content.text = tourismResponse.description ?: ""
@@ -34,6 +34,8 @@ class ViewLoader : ImageLoaderInterface<View, TourismResponse> {
 
         }
     }
+
+
 
     override fun createView(context: Context): View = LayoutInflater.from(context).inflate(R.layout.item_tourism_k6,null)
 
