@@ -442,7 +442,7 @@ public class Banner<T> extends FrameLayout implements OnPageChangeListener {
     private void setData() {
         currentItem = 1;
         if (adapter == null) {
-            adapter = new BannerPagerAdapter(views, listener);
+            adapter = new BannerPagerAdapter();
             viewPager.addOnPageChangeListener(this);
         }
         viewPager.setAdapter(adapter);
@@ -513,7 +513,39 @@ public class Banner<T> extends FrameLayout implements OnPageChangeListener {
             realPosition += count;
         return realPosition;
     }
+    class BannerPagerAdapter extends PagerAdapter {
 
+        @Override
+        public int getCount() {
+            return views.size();
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == object;
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, final int position) {
+            container.addView(views.get(position));
+            View view = views.get(position);
+            if (listener != null) {
+                view.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listener.onBannerClick(position);
+                    }
+                });
+            }
+            return view;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((View) object);
+        }
+
+    }
     @Override
     public void onPageScrollStateChanged(int state) {
         if (mOnPageChangeListener != null) {

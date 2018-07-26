@@ -3,11 +3,14 @@ package com.yj.xxxbanner.view
 import android.content.Context
 import android.support.v4.view.ViewPager
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
+import kotlin.math.abs
 
 
 open class BannerViewPager : ViewPager {
     private var scrollable = true
+    private var startX = 0f
 
     constructor(context: Context) : super(context) {}
 
@@ -24,13 +27,23 @@ open class BannerViewPager : ViewPager {
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
-        return if (this.scrollable) {
-            if (currentItem == 0 && childCount == 0) {
-                false
-            } else super.onInterceptTouchEvent(ev)
-        } else {
-            false
+        when (ev.action) {
+            MotionEvent.ACTION_DOWN -> {
+                startX = ev.x
+            }
+            MotionEvent.ACTION_UP -> {
+                if (abs(ev.x - startX) < 5f) {
+                    return if (this.scrollable) {
+                        if (currentItem == 0 && childCount == 0) {
+                            false
+                        } else super.onInterceptTouchEvent(ev)
+                    } else {
+                        false
+                    }
+                }
+            }
         }
+        return super.onInterceptTouchEvent(ev)
     }
 
     fun setScrollable(scrollable: Boolean) {

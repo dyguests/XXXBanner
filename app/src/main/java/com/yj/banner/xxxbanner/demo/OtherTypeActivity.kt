@@ -20,11 +20,12 @@ class OtherTypeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_other_type)
         val arrayList = Gson().fromJson<List<TourismResponse>>(json, (object : TypeToken<List<TourismResponse>>() {}).type)
         (banner as (Banner<TourismResponse>)).setImages(arrayList)
+                .setDelayTime(4000)
                 .setBannerAnimation(Transformer.Alpha)
                 .setImageLoader(ViewLoader())
                 .setOnBannerListener(object : OnBannerListener {
                     override fun onBannerClick(position: Int) {
-                        Toast.makeText(this@OtherTypeActivity, arrayList[position].title, Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@OtherTypeActivity, position.toString(), Toast.LENGTH_SHORT).show()
                     }
                 })
                 .start()
