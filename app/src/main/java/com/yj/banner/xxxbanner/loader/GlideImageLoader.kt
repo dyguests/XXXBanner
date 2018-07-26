@@ -4,10 +4,10 @@ import android.content.Context
 import android.widget.ImageView
 
 import com.yj.banner.xxxbanner.util.GlideUtil
-import com.yj.xxxbanner.loader.ImageLoaderInterface
+import com.yj.xxxbanner.loader.LoaderInterface
 
 
-class GlideImageLoader : ImageLoaderInterface<ImageView, String> {
+class GlideImageLoader : LoaderInterface<ImageView, String> {
     override fun displayView(context: Context, bean: String, view: ImageView, position: Int, count: Int) {
         GlideUtil.loadPicture(view, bean)
     }

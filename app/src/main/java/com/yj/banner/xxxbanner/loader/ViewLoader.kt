@@ -3,12 +3,11 @@ package com.yj.banner.xxxbanner.loader
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
 import com.yj.banner.xxxbanner.R
 import com.yj.banner.xxxbanner.bean.TourismResponse
 import com.yj.banner.xxxbanner.util.GlideUtil
 import com.yj.banner.xxxbanner.util.SystemUtil
-import com.yj.xxxbanner.loader.ImageLoaderInterface
+import com.yj.xxxbanner.loader.LoaderInterface
 import kotlinx.android.synthetic.main.item_tourism_k6.view.*
 
 /**
@@ -16,7 +15,7 @@ import kotlinx.android.synthetic.main.item_tourism_k6.view.*
  * time: 2018/7/18
  * @author yinYin
  */
-class ViewLoader : ImageLoaderInterface<View, TourismResponse> {
+class ViewLoader : LoaderInterface<View, TourismResponse> {
     override fun displayView(context: Context, tourismResponse: TourismResponse, view: View, position: Int, count: Int) {
         view.apply {
             tv_title.text = tourismResponse.title?.takeIf { it.isNotBlank() }?.let { "$it" } ?: ""

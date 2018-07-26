@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 import com.yj.xxxbanner.adapter.BannerPagerAdapter;
 import com.yj.xxxbanner.listener.OnBannerListener;
-import com.yj.xxxbanner.loader.ImageLoaderInterface;
+import com.yj.xxxbanner.loader.LoaderInterface;
 import com.yj.xxxbanner.view.BannerViewPager;
 
 import java.lang.reflect.Field;
@@ -65,7 +65,7 @@ public class Banner<T> extends FrameLayout implements OnPageChangeListener {
     private TextView bannerTitle, numIndicatorInside, numIndicator;
     private LinearLayout indicator, indicatorInside, titleView;
     private ImageView bannerDefaultImage;
-    private ImageLoaderInterface imageLoader;
+    private LoaderInterface imageLoader;
     private PagerAdapter adapter;
     private OnPageChangeListener mOnPageChangeListener;
     private BannerScroller mScroller;
@@ -99,7 +99,7 @@ public class Banner<T> extends FrameLayout implements OnPageChangeListener {
         handleTypedArray(context, attrs);
         View view = LayoutInflater.from(context).inflate(mLayoutResId, this, true);
         bannerDefaultImage = view.findViewById(R.id.bannerDefaultImage);
-        viewPager =  view.findViewById(R.id.bannerViewPager);
+        viewPager = view.findViewById(R.id.bannerViewPager);
         titleView = view.findViewById(R.id.titleView);
         indicator = view.findViewById(R.id.circleIndicator);
         indicatorInside = view.findViewById(R.id.indicatorInside);
@@ -151,7 +151,7 @@ public class Banner<T> extends FrameLayout implements OnPageChangeListener {
         return this;
     }
 
-    public Banner setImageLoader(ImageLoaderInterface imageLoader) {
+    public Banner setImageLoader(LoaderInterface imageLoader) {
         this.imageLoader = imageLoader;
         return this;
     }
@@ -356,16 +356,28 @@ public class Banner<T> extends FrameLayout implements OnPageChangeListener {
             T t = null;
             if (i == 0) {
                 t = dataList.get(count - 1);
+                if (imageLoader != null) {
+                    imageLoader.displayView(context, t, view, count - 1, count);
+                } else {
+                    Log.e(tag, "Please set images loader.");
+                }
             } else if (i == count + 1) {
                 t = dataList.get(0);
+                if (imageLoader != null) {
+                    imageLoader.displayView(context, t, view, 0, count);
+                } else {
+                    Log.e(tag, "Please set images loader.");
+                }
             } else {
                 t = dataList.get(i - 1);
+                if (imageLoader != null) {
+                    imageLoader.displayView(context, t, view, i-1, count);
+                } else {
+                    Log.e(tag, "Please set images loader.");
+                }
             }
             views.add(view);
-            if (imageLoader != null)
-                imageLoader.displayView(context, t, view);
-            else
-                Log.e(tag, "Please set images loader.");
+
         }
     }
 

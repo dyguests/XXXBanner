@@ -4,10 +4,9 @@ import android.content.Context
 import android.view.View
 
 import java.io.Serializable
-import java.text.FieldPosition
 
 
-interface ImageLoaderInterface<T : View, in K> : Serializable {
+interface LoaderInterface<T : View, in K> : Serializable {
     //对数据进行展示
     fun displayView(context: Context, bean: K, view: T,position: Int,count:Int)
 
