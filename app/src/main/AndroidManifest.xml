@@ -31,6 +31,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".demo.OtherTypeActivity">
         </activity>
+        <activity android:name=".demo.MultiActivity">
+        </activity>
     </application>
 
 </manifest>

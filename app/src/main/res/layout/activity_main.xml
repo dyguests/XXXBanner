@@ -80,6 +80,10 @@
                         android:id="@+id/item8"
                         style="@style/text_style"
                         android:text="自定义banner的样式"/>
+                    <TextView
+                        android:id="@+id/item9"
+                        style="@style/text_style"
+                        android:text="自定义banner的多布局样式"/>
                 </android.support.v7.widget.LinearLayoutCompat>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>

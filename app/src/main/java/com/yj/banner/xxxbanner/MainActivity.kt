@@ -67,7 +67,9 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
         item8.setOnClickListener {
             startActivity(Intent(this, OtherTypeActivity::class.java))
         }
-
+        item9.setOnClickListener {
+            startActivity(Intent(this, MultiActivity::class.java))
+        }
     }
 
     override fun onBannerClick(position: Int) {
