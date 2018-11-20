@@ -14,5 +14,5 @@ XXXBanner init
 }
   
   	dependencies {
-	        implementation 'com.github.yinjinyj:XXXBanner:1.0.4'
+	        implementation 'com.github.yinjinyj:XXXBanner:1.0.6'
 	}
