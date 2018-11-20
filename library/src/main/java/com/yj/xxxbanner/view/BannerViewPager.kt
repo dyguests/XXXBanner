@@ -10,6 +10,7 @@ import kotlin.math.abs
 
 open class BannerViewPager : ViewPager {
     private var scrollable = true
+     var scrollToucheAble = true
     private var startX = 0f
 
     constructor(context: Context) : super(context) {}
@@ -17,13 +18,18 @@ open class BannerViewPager : ViewPager {
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {}
 
     override fun onTouchEvent(ev: MotionEvent): Boolean {
-        return if (this.scrollable) {
-            if (currentItem == 0 && childCount == 0) {
-                false
-            } else super.onTouchEvent(ev)
+        return if (!scrollToucheAble) {
+            true
         } else {
-            false
+            if (this.scrollable) {
+                if (currentItem == 0 && childCount == 0) {
+                    false
+                } else super.onTouchEvent(ev)
+            } else {
+                false
+            }
         }
+
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {

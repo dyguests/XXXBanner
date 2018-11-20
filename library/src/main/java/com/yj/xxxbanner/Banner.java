@@ -71,7 +71,7 @@ public class Banner<T> extends FrameLayout implements OnPageChangeListener {
     private BannerScroller mScroller;
     private OnBannerListener listener;
     private DisplayMetrics dm;
-
+    private Boolean enableTouchEvent = true;
     private WeakHandler handler = new WeakHandler();
 
     public Banner(Context context) {
@@ -501,6 +501,14 @@ public class Banner<T> extends FrameLayout implements OnPageChangeListener {
         return super.dispatchTouchEvent(ev);
     }
 
+    public Boolean getEnableTouchEvent() {
+        return enableTouchEvent;
+    }
+
+    public void setEnableTouchEvent(Boolean enableTouchEvent) {
+        viewPager.setScrollToucheAble(enableTouchEvent);
+    }
+
     /**
      * 返回真实的位置
      *
@@ -571,6 +579,7 @@ public class Banner<T> extends FrameLayout implements OnPageChangeListener {
                 break;
         }
     }
+
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

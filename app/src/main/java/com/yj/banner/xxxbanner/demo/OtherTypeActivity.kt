@@ -29,6 +29,7 @@ class OtherTypeActivity : AppCompatActivity() {
                     }
                 })
                 .start()
+        (banner as (Banner<TourismResponse>)).enableTouchEvent=false
     }
 
     companion object {
