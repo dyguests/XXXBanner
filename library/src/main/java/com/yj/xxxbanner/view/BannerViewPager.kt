@@ -3,7 +3,6 @@ package com.yj.xxxbanner.view
 import android.content.Context
 import android.support.v4.view.ViewPager
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import kotlin.math.abs
 
@@ -18,16 +17,12 @@ open class BannerViewPager : ViewPager {
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {}
 
     override fun onTouchEvent(ev: MotionEvent): Boolean {
-        return if (!scrollToucheAble) {
-            true
-        } else {
-            if (this.scrollable) {
-                if (currentItem == 0 && childCount == 0) {
-                    false
-                } else super.onTouchEvent(ev)
-            } else {
+        return if (this.scrollable) {
+            if (currentItem == 0 && childCount == 0) {
                 false
-            }
+            } else super.onTouchEvent(ev)
+        } else {
+            false
         }
 
     }
@@ -36,6 +31,9 @@ open class BannerViewPager : ViewPager {
         when (ev.action) {
             MotionEvent.ACTION_DOWN -> {
                 startX = ev.x
+            }
+            MotionEvent.ACTION_MOVE -> {
+                return scrollToucheAble
             }
             MotionEvent.ACTION_UP -> {
                 if (abs(ev.x - startX) < 5f) {

@@ -18,6 +18,7 @@ class OtherTypeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_other_type)
+        (banner as (Banner<TourismResponse>)).setOnClickListener {  }
         val arrayList = Gson().fromJson<List<TourismResponse>>(json, (object : TypeToken<List<TourismResponse>>() {}).type)
         (banner as (Banner<TourismResponse>)).setImages(arrayList)
                 .setDelayTime(4000)
