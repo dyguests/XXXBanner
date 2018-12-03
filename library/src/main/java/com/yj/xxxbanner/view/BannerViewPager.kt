@@ -9,7 +9,7 @@ import kotlin.math.abs
 
 open class BannerViewPager : ViewPager {
     private var scrollable = true
-     var scrollToucheAble = true
+    var scrollToucheAble = true
     private var startX = 0f
 
     constructor(context: Context) : super(context) {}
@@ -33,7 +33,7 @@ open class BannerViewPager : ViewPager {
                 startX = ev.x
             }
             MotionEvent.ACTION_MOVE -> {
-                return scrollToucheAble
+                return scrollToucheAble && super.onInterceptTouchEvent(ev)
             }
             MotionEvent.ACTION_UP -> {
                 if (abs(ev.x - startX) < 5f) {
