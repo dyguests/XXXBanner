@@ -1,6 +1,6 @@
 # XXXBanner
 
-[![](https://jitpack.io/v/dyguests/XXXBanner.svg)](https://jitpack.io/#dyguests/XXXBanner)![kotlin](https://img.shields.io/badge/language-kotlin-brightgreen.svg)
+[![](https://jitpack.io/v/dyguests/XXXBanner.svg)](https://jitpack.io/#dyguests/XXXBanner) ![kotlin](https://img.shields.io/badge/language-kotlin-brightgreen.svg)
   
   
 ## Import
