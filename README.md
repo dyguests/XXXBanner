@@ -16,9 +16,9 @@
 
 2. Add the dependency in your module build.gradle:
 
-	dependencies {
-	        implementation 'com.github.dyguests:XXXBanner:x.y.z'
-	}
+        dependencies {
+                implementation 'com.github.dyguests:XXXBanner:x.y.z'
+        }
 
 ## TODO
 
